@@ -1,0 +1,54 @@
+<!-- Özgün çizim (2026, Bayel Yapı demo): klasik pusula gülü arketipi + B monogram.
+     Üçüncü taraf logo dosyasından türetilmemiştir. Runtime eşi: assets/js/components/compass.js -->
+<svg role="img" aria-label="Bayel Yapı pusula-B monogramı" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" aria-hidden="true" focusable="false">
+      <mask id="pusula-b-file">
+        <rect width="200" height="200" fill="#fff"/>
+        <text x="100" y="101" text-anchor="middle" dominant-baseline="central"
+              font-family="Iowan Old Style, Baskerville, 'Times New Roman', serif"
+              font-size="33" font-weight="600" fill="#000">B</text>
+      </mask>
+      <g fill="#10312b" mask="url(#pusula-b-file)">
+        <circle cx="100" cy="100" r="95" fill="none" stroke="#10312b" stroke-width="4"/>
+        <circle cx="100" cy="100" r="86" fill="none" stroke="#10312b" stroke-width="1.5"/>
+        <g class="compass-rose">
+        <g>
+      <g transform="rotate(22.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(67.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(112.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(157.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(202.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(247.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(292.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g>
+      <g transform="rotate(337.5 100 100)">
+        <circle cx="100" cy="64" r="2.1"/><circle cx="100" cy="56" r="2.1"/><circle cx="100" cy="48" r="2.1"/><circle cx="100" cy="40" r="2.1"/><circle cx="100" cy="32" r="2.1"/><circle cx="100" cy="24" r="2.1"/>
+      </g></g>
+        <!-- kısa uçlar (ara yönler) -->
+        <g transform="rotate(45 100 100)">
+          <path d="M100 40 L109 88 L100 100 L91 88 Z"/>
+          <path d="M100 160 L109 112 L100 100 L91 112 Z"/>
+          <path d="M40 100 L88 91 L100 100 L88 109 Z"/>
+          <path d="M160 100 L112 91 L100 100 L112 109 Z"/>
+        </g>
+        <!-- uzun uçlar (ana yönler) -->
+        <path d="M100 12 L111 84 L100 100 L89 84 Z"/>
+        <path d="M100 188 L111 116 L100 100 L89 116 Z"/>
+        <path d="M12 100 L84 89 L100 100 L84 111 Z"/>
+        <path d="M188 100 L116 89 L100 100 L116 111 Z"/>
+        </g>
+        <circle cx="100" cy="100" r="22"/>
+      </g>
+    </svg>

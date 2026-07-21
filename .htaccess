@@ -1,0 +1,69 @@
+# Bayel Yapı — Turhost/Apache kuralları: güvenlik + önbellek + sıkıştırma
+# (18.07.2026 güvenlik taraması: panel https yönlendirmesi fiilen yoktu, burada zorlanır)
+
+ErrorDocument 404 /404.html
+# 410 Gone (kaldırılmış /haberler/*) ham Apache çıktısı vermesin; aynı sayfa,
+# durum kodu 410 kalır — Google için "kalıcı olarak kaldırıldı" sinyali sürer.
+ErrorDocument 410 /404.html
+
+# Dizin listeleme kapalı (Turhost autoindex'i /assets/ vb. klasörleri döküyordu)
+Options -Indexes
+
+# http→https ve www→apex tek 301 (AutoSSL doğrulama yolu hariç)
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Eski WordPress yollarından yeni yapıya kalıcı 301 (21.07.2026 SEO devri).
+  # Google indeksinde hâlâ eski www/TR yolları duruyordu ve sert 404 dönüyordu
+  # (örn. www.bayelyapi.com/iletisim/). Hedef mutlak yazıldığı için www→apex
+  # düzeltmesi de aynı sıçramada olur — zincir tek adım kalır.
+  RewriteRule ^iletisim/?$      https://bayelyapi.com/contact/  [L,R=301]
+  RewriteRule ^hakkimizda/?$    https://bayelyapi.com/about/    [L,R=301]
+  RewriteRule ^projeler(/.*)?$  https://bayelyapi.com/projects/ [L,R=301]
+  RewriteRule ^hizmetler(/.*)?$ https://bayelyapi.com/projects/ [L,R=301]
+
+  # /haberler/* için yeni sitede KARŞILIĞI YOK. Ana sayfaya 301 vermek yanlış
+  # olurdu: Google alakasız hedefe yönlendirmeyi "soft 404" sayar ve kullanıcı
+  # haber linkinden ana sayfaya düşünce ne olduğunu anlamaz. 410 Gone = içerik
+  # kalıcı olarak kaldırıldı; Google indeksten 404'e göre daha hızlı düşürür.
+  RewriteRule ^haberler(/.*)?$  - [G]
+
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://bayelyapi.com%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+  # HSTS: yalnız apex (includeSubDomains yok — webmail/mail alt alanları http kalabilir)
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # CSP: vanilla statik site; tek inline script hash'li, stil attribute'ları için unsafe-inline,
+  # form AJAX'ı yalnız FormSubmit'e çıkar
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-qOhFsq0QMV2REqNwk5hGH5bZE9SkX6gt6yeyKdYPv+U='; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://formsubmit.co; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co; frame-ancestors 'self'"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 30 days"
+  ExpiresByType image/svg+xml "access plus 30 days"
+  ExpiresByType image/png "access plus 30 days"
+  ExpiresByType image/x-icon "access plus 30 days"
+  ExpiresByType image/vnd.microsoft.icon "access plus 30 days"
+  ExpiresByType text/css "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "no-cache, must-revalidate"
+  </FilesMatch>
+</IfModule>
